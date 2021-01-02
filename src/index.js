@@ -24,11 +24,21 @@ objects.push(sunMesh);
 const light = new THREE.PointLight(0xffffff, 3);
 scene.add(light);
 
+const earthMaterial = new THREE.MeshPhongMaterial({
+  color: 0x2233ff,
+  emissive: 0x112244
+});
+const earthMesh = new THREE.Mesh(sphereGeometry, earthMaterial);
+earthMesh.position.x = 10;
+scene.add(earthMesh);
+objects.push(earthMesh);
+
 function render(time) {
   time *= 0.001;
   objects.forEach((obj) => {
     obj.rotation.y = time;
   });
+
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.render(scene, camera);
