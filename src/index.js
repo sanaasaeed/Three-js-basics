@@ -24,7 +24,16 @@ objects.push(sunMesh);
 const light = new THREE.PointLight(0xffffff, 3);
 scene.add(light);
 
-camera.aspect = window.innerWidth / window.innerHeight;
-camera.updateProjectionMatrix();
+function render(time) {
+  time *= 0.001;
+  objects.forEach((obj) => {
+    obj.rotation.y = time;
+  });
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.render(scene, camera);
 
-renderer.render(scene, camera);
+  requestAnimationFrame(render);
+}
+
+requestAnimationFrame(render);
